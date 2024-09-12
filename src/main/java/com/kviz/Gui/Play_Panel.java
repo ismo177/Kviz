@@ -86,7 +86,8 @@ public class Play_Panel extends JFrame  implements WindowListener {
         answer1Button.setFont(new Font("Times New Roman", Font.BOLD, 40));
         //answer1Button.setBorder(new LineBorder(new Color(141, 180, 225), 10, true));
         answer1Button.setBackground(new Color(185, 178, 250));
-        answer1Button.addActionListener(this::handleAnswer1Button);
+        //answer1Button.addActionListener(this::handleAnswer1Button);
+        answer1Button.addActionListener(this::handleAnswer);
 
 
         answer2Button = new JButton("----Answer2----");
@@ -96,7 +97,8 @@ public class Play_Panel extends JFrame  implements WindowListener {
         answer2Button.setFont(new Font("Times New Roman", Font.BOLD, 40));
        //answer2Button.setBorder(new LineBorder(Color.black, 1, true));
         answer2Button.setBackground(new Color(185, 178, 250));
-        answer2Button.addActionListener(this::handleAnswer2Button);
+       // answer2Button.addActionListener(this::handleAnswer2Button);
+        answer2Button.addActionListener(this::handleAnswer);
 
 
         answer3Button = new JButton("----Answer3----");
@@ -106,7 +108,8 @@ public class Play_Panel extends JFrame  implements WindowListener {
         answer3Button.setFont(new Font("Times New Roman", Font.BOLD, 40));
        // answer3Button.setBorder(new LineBorder(Color.black, 1, true));
         answer3Button.setBackground(new Color(185, 178, 250));
-        answer3Button.addActionListener(this::handleAnswer3Button);
+        //answer3Button.addActionListener(this::handleAnswer3Button);
+        answer3Button.addActionListener(this::handleAnswer);
 
 
         answer4Button = new JButton("----Answer4----");
@@ -116,7 +119,8 @@ public class Play_Panel extends JFrame  implements WindowListener {
        // answer4Button.setBorder(new LineBorder(Color.black, 1, true));
         answer4Button.setFont(new Font("Times New Roman", Font.BOLD, 40));
         answer4Button.setBackground(new Color(185, 178, 250));
-        answer4Button.addActionListener(this::handleAnswer4Button);
+        //answer4Button.addActionListener(this::handleAnswer4Button);
+        answer4Button.addActionListener(this::handleAnswer);
 
 
 
@@ -309,40 +313,23 @@ public void loadListDB() {
 }
 
 //******************************************************************************************************
-public void handleAnswer1Button(ActionEvent e) {
-        if (answer1Button.getText().equals(/*quizItem*/answer.getIsCorrect())) {
-            answer1Button.setBackground(new Color(182, 237, 182));
-            try {
-                task = new TimerTask() {
-                    public void run() {
-                        answer1Button.setBackground(new Color(185, 178, 250));
-                        // setItemOnPanel();
-                        setItemOnPanelDB();
-                    }
-                };
-            }catch(IllegalStateException ex1){
-                System.out.println("Error in 'handleAnswer1Button()' :"+ex1.getMessage());
-            }
-            timer.schedule(task, 1000);
-            score += scorePerMatch;
-            scoreLab.setText(""+score);
 
-        } else {
-                answer1Button.setBackground(new Color(241, 109, 109));
-                try {
-                    task = new TimerTask() {
-                        public void run() {
-                            answer1Button.setBackground(new Color(185, 178, 250));
-                            // setItemOnPanel();
-                            setItemOnPanelDB();
-                        }
-                    };
-                }catch(IllegalStateException ex){
-                    System.out.println("Error in 'handleAnswer1Button()' :"+ex.getMessage());
-                }
-                timer.schedule(task, 1000);
+ //**************************************************************************************************
+    public void handleAnswer(ActionEvent e) {
+        JButton answerButton = (JButton) e.getSource();
+        String correctAnswer = answer.getIsCorrect();
+        if (answerButton.getText().equals(correctAnswer)) {
+
+                answerButton.setBackground(new Color(182, 237, 182));
+                repaintOfferedAnswerLabels(answerButton);
+                score += scorePerMatch;
+                scoreLab.setText("" + score);
+        }
+        else {
+                answerButton.setBackground(new Color(241, 109, 109));
+                repaintOfferedAnswerLabels(answerButton);
                 failCounter++;
-                failLab.setText(""+failCounter);
+                failLab.setText("" + failCounter);
                 if (failCounter == 2) {
                     //savePlayerScore();
                     savePlayerScoreDB();
@@ -350,150 +337,26 @@ public void handleAnswer1Button(ActionEvent e) {
                     this.dispose();
                 }
 
-                }
-    }
-
-//*********************************************************************************************************
-    public void handleAnswer2Button(ActionEvent e) {
-        if (answer2Button.getText().equals(/*quizItem*/answer.getIsCorrect())) {
-            answer2Button.setBackground(new Color(182, 237, 182));
-            try {
-                task = new TimerTask() {
-                    public void run() {
-                        answer2Button.setBackground(new Color(185, 178, 250));
-                        // setItemOnPanel();
-                        setItemOnPanelDB();
-                    }
-                };
-            }catch(IllegalStateException ex){
-                System.out.println("Error in 'handleAnswer2Button()' :"+ex.getMessage());
-            }
-            timer.schedule(task, 1000);
-            score += scorePerMatch;
-            scoreLab.setText(""+score);
-
-        } else {
-            answer2Button.setBackground(new Color(241, 109, 109));
-            try {
-                task = new TimerTask() {
-                    public void run() {
-                        answer2Button.setBackground(new Color(185, 178, 250));
-                        // setItemOnPanel();
-                        setItemOnPanelDB();
-                    }
-                };
-            }catch(IllegalStateException ex){
-                System.out.println("Error in 'handleAnswer1Button()' :"+ex.getMessage());
-            }
-            timer.schedule(task, 1000);
-            failCounter++;
-            failLab.setText(""+failCounter);
-            if (failCounter == 2) {
-                //savePlayerScore();
-                savePlayerScoreDB();
-                new Player_Score_Panel(player_Name, score);
-                this.dispose();
-
-
-            }
-
         }
     }
 
-//************************************************************************************************
-public void handleAnswer3Button(ActionEvent e) {
-    if (answer3Button.getText().equals(/*quizItem*/answer.getIsCorrect())) {
-        answer3Button.setBackground(new Color(182, 237, 182));
-        try {
+public void repaintOfferedAnswerLabels(JButton button){
+    try {
             task = new TimerTask() {
                 public void run() {
-                    answer3Button.setBackground(new Color(185, 178, 250));
-                    // setItemOnPanel();
+                    button.setBackground(new Color(185, 178, 250));
                     setItemOnPanelDB();
                 }
             };
-        }catch(IllegalStateException ex){
-            System.out.println("Error in 'handleAnswer3Button()' :"+ex.getMessage());
+        }
+    catch (IllegalStateException ex) {
+        System.out.println("Error in 'handleAnswer' :" + ex.getMessage());
         }
         timer.schedule(task, 1000);
-        score += scorePerMatch;
-        scoreLab.setText("" + score);
 
-
-    } else {
-        answer3Button.setBackground(new Color(241, 109, 109));
-        try {
-            task = new TimerTask() {
-                public void run() {
-                    answer3Button.setBackground(new Color(185, 178, 250));
-                    // setItemOnPanel();
-                    setItemOnPanelDB();
-                }
-            };
-        }catch(IllegalStateException ex){
-            System.out.println("Error in 'handleAnswer3Button()' :"+ex.getMessage());
-        }
-        timer.schedule(task, 1000);
-        failCounter++;
-        failLab.setText(""+failCounter);
-        if (failCounter == 2) {
-            //savePlayerScore();
-            savePlayerScoreDB();
-            new Player_Score_Panel(player_Name, score);
-            this.dispose();
-
-
-        }
-
-    }
 }
- //**************************************************************************************************
-    public void handleAnswer4Button(ActionEvent e) {
-        if (answer4Button.getText().equals(/*quizItem*/answer.getIsCorrect())) {
-            answer4Button.setBackground(new Color(182, 237, 182));
-            try {
-                task = new TimerTask() {
-                    public void run() {
-                        answer3Button.setBackground(new Color(185, 178, 250));
-                        // setItemOnPanel();
-                        setItemOnPanelDB();
-                    }
-                };
-            }catch(IllegalStateException ex){
-                System.out.println("Error in 'handleAnswer4Button()' :"+ex.getMessage());
-            }
-            timer.schedule(task, 1000);
-            score += scorePerMatch;
-            scoreLab.setText("" + score);
 
 
-        } else {
-            answer4Button.setBackground(new Color(241, 109, 109));
-            try {
-                task = new TimerTask() {
-                    public void run() {
-                        answer3Button.setBackground(new Color(185, 178, 250));
-                        // setItemOnPanel();
-                        setItemOnPanelDB();
-                    }
-                };
-            }catch(IllegalStateException ex){
-                System.out.println("Error in 'handleAnswer4Button()' :"+ex.getMessage());
-            }
-            timer.schedule(task, 1000);
-            failCounter++;
-            failLab.setText(""+failCounter);
-            if (failCounter == 2) {
-                //savePlayerScore();
-                savePlayerScoreDB();
-                new Player_Score_Panel(player_Name, score);
-                this.dispose();
-               // JOptionPane.showMessageDialog(this,  "Your Score: " + score);
-
-            }
-
-        }
-    }
 //****************************************************************************************************
     public void savePlayerScore(){
         try{
@@ -537,6 +400,5 @@ public void handleAnswer3Button(ActionEvent e) {
     public void handleEndGameButton(ActionEvent e) {
         this.dispose();
 }
-
 
 }
