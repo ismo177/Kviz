@@ -24,13 +24,13 @@ import java.util.Timer;
 public class Play_Panel extends JFrame  implements WindowListener {
     JButton answer1Button, answer2Button, answer3Button, answer4Button, endGameButton;
     JPanel mainPanel;
-    JLabel titleLabel, questionLabel, scoreLabel, failCounterLabel, scoreLab,failLab;
+    JLabel titleLabel, questionLabel, scoreLabel, failCounterLabel, scoreValueLabel, failCounterValueLabel;
     int score=0;
     int scorePerMatch=10;
     int failCounter =0;
     int cat;
    // List<Quiz_Item> list;
-    List<QuizItem> list;
+    List<QuizItem> quizItemList;
     //Quiz_Item quizItem;
     QuizItem quizItem;
     Timer timer;
@@ -143,12 +143,12 @@ public class Play_Panel extends JFrame  implements WindowListener {
         scoreLabel.setLocation(screenSize.width-210, 340);
 
 
-        scoreLab=new JLabel(""+score);
-        scoreLab.setSize(100,100);
-        scoreLab.setForeground(new Color(5, 108, 5));
-        scoreLab.setBackground(new Color(171, 165, 241));
-        scoreLab.setFont(new Font("Times New Roman", Font.BOLD, 30));
-        scoreLab.setLocation(screenSize.width-100, 330);
+        scoreValueLabel =new JLabel(""+score);
+        scoreValueLabel.setSize(100,100);
+        scoreValueLabel.setForeground(new Color(5, 108, 5));
+        scoreValueLabel.setBackground(new Color(171, 165, 241));
+        scoreValueLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        scoreValueLabel.setLocation(screenSize.width-100, 330);
 
 
         failCounterLabel= new JLabel("Fail (x2): ");
@@ -158,12 +158,12 @@ public class Play_Panel extends JFrame  implements WindowListener {
         failCounterLabel.setBackground(new Color(185, 178, 250));
         failCounterLabel.setLocation(screenSize.width-210, 410);
 
-        failLab=new JLabel(""+score);
-        failLab.setSize(100,100);
-        failLab.setForeground(new Color(255, 0, 0));
-        failLab.setBackground(new Color(171, 165, 241));
-        failLab.setFont(new Font("Times New Roman", Font.BOLD, 30));
-        failLab.setLocation(screenSize.width-100, 400);
+        failCounterValueLabel =new JLabel(""+score);
+        failCounterValueLabel.setSize(100,100);
+        failCounterValueLabel.setForeground(new Color(255, 0, 0));
+        failCounterValueLabel.setBackground(new Color(171, 165, 241));
+        failCounterValueLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        failCounterValueLabel.setLocation(screenSize.width-100, 400);
 
 
 
@@ -181,9 +181,9 @@ public class Play_Panel extends JFrame  implements WindowListener {
         mainPanel.add(answer3Button);
         mainPanel.add(answer4Button);
         mainPanel.add(scoreLabel);
-        mainPanel.add(scoreLab);
+        mainPanel.add(scoreValueLabel);
         mainPanel.add(failCounterLabel);
-        mainPanel.add(failLab);
+        mainPanel.add(failCounterValueLabel);
         mainPanel.add(endGameButton);
         add(mainPanel);
         addWindowListener(this);
@@ -198,7 +198,7 @@ public class Play_Panel extends JFrame  implements WindowListener {
     @Override
     public void windowOpened(WindowEvent e) {
             //loadList();
-            loadListDB();
+            loadQuizItemListDB();
         //setItemOnPanel();
         loadQuizItem();
 
@@ -262,11 +262,11 @@ public class Play_Panel extends JFrame  implements WindowListener {
 //**************************************************************************************************************
 
     public void loadQuizItem(){
-        if(!list.isEmpty()) {
-            int i = random.nextInt(list.size());
-            quizItem = list.get(i);
+        if(!quizItemList.isEmpty()) {
+            int i = random.nextInt(quizItemList.size());
+            quizItem =quizItemList.get(i);
             setQuizItemOnPlayPanel();
-            list.remove(i);
+            quizItemList.remove(i);
 
         }else{
             //savePlayerScore();
@@ -276,12 +276,17 @@ public class Play_Panel extends JFrame  implements WindowListener {
         }
     }
 
+
     public void setQuizItemOnPlayPanel(){
         questionLabel.setText(quizItem.getQuestion().getQuestionText());
         answer1Button.setText(quizItem.getAnswerText1());
+        answer1Button.setBackground(new Color(185, 178, 250));
         answer2Button.setText(quizItem.getAnswerText2());
+        answer2Button.setBackground(new Color(185, 178, 250));
         answer3Button.setText(quizItem.getAnswerText3());
+        answer3Button.setBackground(new Color(185, 178, 250));
         answer4Button.setText(quizItem.getAnswerText4());
+        answer4Button.setBackground(new Color(185, 178, 250));
     }
 //***************************************************************************************************************
 public void loadList() throws IOException {
@@ -307,16 +312,14 @@ public void loadList() throws IOException {
        }
 }
 //*******************************************************************************************************
-public void loadListDB() {
+public void loadQuizItemListDB() {
     CategoryService categoryService = new CategoryService();
     Category category=categoryService.find(cat);
 
-    QuizItemService answerService = new QuizItemService();
-    list= answerService.findByCategory(category);
+    QuizItemService quizItemService = new QuizItemService();
+    quizItemList = quizItemService.findByCategory(category);
 
 }
-
-//******************************************************************************************************
 
  //**************************************************************************************************
     public void handleAnswer(ActionEvent e) {
@@ -325,32 +328,30 @@ public void loadListDB() {
         if (answerButton.getText().equals(correctAnswer)) {
 
                 answerButton.setBackground(new Color(182, 237, 182));
-                resetQuizItem(answerButton);
+                repaintButton(answerButton);
                 score += scorePerMatch;
-                scoreLab.setText("" + score);
+                scoreValueLabel.setText("" + score);
         }
         else {
                 answerButton.setBackground(new Color(241, 109, 109));
-                resetQuizItem(answerButton);
+                repaintButton(answerButton);
                 failCounter++;
-                failLab.setText("" + failCounter);
+                failCounterValueLabel.setText("" + failCounter);
                 if (failCounter == 2) {
                     //savePlayerScore();
                     savePlayerScoreDB();
                     new Player_Score_Panel(player_Name, score);
                     this.dispose();
                 }
-
         }
     }
 
-public void resetQuizItem(JButton button){
+
+public void repaintButton(JButton button){
     try {
             task = new TimerTask() {
                 public void run() {
-                    button.setBackground(new Color(185, 178, 250));
                     loadQuizItem();
-
                 }
             };
         }
@@ -358,7 +359,6 @@ public void resetQuizItem(JButton button){
         System.out.println("Error in 'handleAnswer' :" + ex.getMessage());
         }
         timer.schedule(task, 1000);
-
 }
 
 
