@@ -328,13 +328,13 @@ public void loadQuizItemListDB() {
         if (answerButton.getText().equals(correctAnswer)) {
 
                 answerButton.setBackground(new Color(182, 237, 182));
-                repaintButton(answerButton);
+                repaintPanelAndReloadQuizItem(answerButton);
                 score += scorePerMatch;
                 scoreValueLabel.setText("" + score);
         }
         else {
                 answerButton.setBackground(new Color(241, 109, 109));
-                repaintButton(answerButton);
+                repaintPanelAndReloadQuizItem(answerButton);
                 failCounter++;
                 failCounterValueLabel.setText("" + failCounter);
                 if (failCounter == 2) {
@@ -347,7 +347,7 @@ public void loadQuizItemListDB() {
     }
 
 
-public void repaintButton(JButton button){
+public void repaintPanelAndReloadQuizItem(JButton button){
     try {
             task = new TimerTask() {
                 public void run() {
