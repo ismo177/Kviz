@@ -1,7 +1,7 @@
 package com.kviz.Gui;
 
-import com.kviz.Answer.Answer;
-import com.kviz.Answer.AnswerService;
+import com.kviz.Answer.QuizItem;
+import com.kviz.Answer.QuizItemService;
 import com.kviz.Category.Category;
 import com.kviz.Category.CategoryService;
 import com.kviz.User.User;
@@ -30,9 +30,9 @@ public class Play_Panel extends JFrame  implements WindowListener {
     int failCounter =0;
     int cat;
    // List<Quiz_Item> list;
-    List<Answer> list;
+    List<QuizItem> list;
     //Quiz_Item quizItem;
-    Answer answer;
+    QuizItem quizItem;
     Timer timer;
     Random random;
     String player_Name;
@@ -68,6 +68,7 @@ public class Play_Panel extends JFrame  implements WindowListener {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setColor(Color.black);
                 g2d.drawRoundRect(10, 10, getWidth() - 20, getHeight() - 20, 30,30);
+                
 
             }
         };
@@ -199,7 +200,7 @@ public class Play_Panel extends JFrame  implements WindowListener {
             //loadList();
             loadListDB();
         //setItemOnPanel();
-        setItemOnPanelDB();
+        loadQuizItem();
 
     }
 
@@ -260,16 +261,11 @@ public class Play_Panel extends JFrame  implements WindowListener {
  */
 //**************************************************************************************************************
 
-    public void setItemOnPanelDB(){
+    public void loadQuizItem(){
         if(!list.isEmpty()) {
             int i = random.nextInt(list.size());
-            answer = list.get(i);
-            questionLabel.setText(answer.getQuestion().getQuestionText());
-            answer1Button.setText(answer.getAnswerText1());
-            answer2Button.setText(answer.getAnswerText2());
-            answer3Button.setText(answer.getAnswerText3());
-            answer4Button.setText(answer.getAnswerText4());
-
+            quizItem = list.get(i);
+            setQuizItemOnPlayPanel();
             list.remove(i);
 
         }else{
@@ -278,6 +274,14 @@ public class Play_Panel extends JFrame  implements WindowListener {
             new Player_Score_Panel(player_Name, score);
             this.dispose();
         }
+    }
+
+    public void setQuizItemOnPlayPanel(){
+        questionLabel.setText(quizItem.getQuestion().getQuestionText());
+        answer1Button.setText(quizItem.getAnswerText1());
+        answer2Button.setText(quizItem.getAnswerText2());
+        answer3Button.setText(quizItem.getAnswerText3());
+        answer4Button.setText(quizItem.getAnswerText4());
     }
 //***************************************************************************************************************
 public void loadList() throws IOException {
@@ -307,7 +311,7 @@ public void loadListDB() {
     CategoryService categoryService = new CategoryService();
     Category category=categoryService.find(cat);
 
-    AnswerService answerService = new AnswerService();
+    QuizItemService answerService = new QuizItemService();
     list= answerService.findByCategory(category);
 
 }
@@ -317,17 +321,17 @@ public void loadListDB() {
  //**************************************************************************************************
     public void handleAnswer(ActionEvent e) {
         JButton answerButton = (JButton) e.getSource();
-        String correctAnswer = answer.getIsCorrect();
+        String correctAnswer = quizItem.getIsCorrect();
         if (answerButton.getText().equals(correctAnswer)) {
 
                 answerButton.setBackground(new Color(182, 237, 182));
-                repaintOfferedAnswerLabels(answerButton);
+                resetQuizItem(answerButton);
                 score += scorePerMatch;
                 scoreLab.setText("" + score);
         }
         else {
                 answerButton.setBackground(new Color(241, 109, 109));
-                repaintOfferedAnswerLabels(answerButton);
+                resetQuizItem(answerButton);
                 failCounter++;
                 failLab.setText("" + failCounter);
                 if (failCounter == 2) {
@@ -340,12 +344,13 @@ public void loadListDB() {
         }
     }
 
-public void repaintOfferedAnswerLabels(JButton button){
+public void resetQuizItem(JButton button){
     try {
             task = new TimerTask() {
                 public void run() {
                     button.setBackground(new Color(185, 178, 250));
-                    setItemOnPanelDB();
+                    loadQuizItem();
+
                 }
             };
         }

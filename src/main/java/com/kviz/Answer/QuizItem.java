@@ -2,7 +2,6 @@ package com.kviz.Answer;
 
 import com.kviz.Question.Question;
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,8 +12,8 @@ import java.util.Objects;
 @Table(name = "answers")
 
 //@NamedQuery(name="findByCategory", query="select a from Answer a inner join a.question q where a.question=:question")
-@NamedQuery(name="findByCategory", query="select a from Answer a inner join a.question q where q.category=:category")
-public class Answer implements Serializable {
+@NamedQuery(name="findByCategory", query="select q from QuizItem q inner join q.question c where c.category=:category")
+public class QuizItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "answer_id", nullable = false)
@@ -103,8 +102,8 @@ public class Answer implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Answer answer = (Answer) o;
-        return Objects.equals(id, answer.id);
+        QuizItem quizItem = (QuizItem) o;
+        return Objects.equals(id, quizItem.id);
     }
 
     @Override

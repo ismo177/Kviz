@@ -1,7 +1,6 @@
 package com.kviz.User;
 
 import com.kviz.AbstractService;
-import com.kviz.Answer.Answer;
 import jakarta.persistence.*;
 
 public class UserService extends AbstractService<User> {

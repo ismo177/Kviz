@@ -7,17 +7,15 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
-import jakarta.transaction.Transaction;
-import jakarta.transaction.TransactionManager;
 
 import java.util.List;
 
-public class AnswerService extends AbstractService<Answer> {
+public class QuizItemService extends AbstractService<QuizItem> {
 
     EntityManager entityManager;
 
-    public AnswerService() {
-        super(Answer.class);
+    public QuizItemService() {
+        super(QuizItem.class);
     }
 
     @Override
@@ -27,13 +25,13 @@ public class AnswerService extends AbstractService<Answer> {
         return entityManager;
     }
 
-   public List<Answer> findByCategory(Category category) {
+   public List<QuizItem> findByCategory(Category category) {
         EntityManager em = entityManager();
         Query query = em.createNamedQuery("findByCategory");
         try {
             query.setParameter("category", category);
-            List<Answer> answers = (List<Answer>) query.getResultList();
-            return answers.isEmpty() ? null : answers;
+            List<QuizItem> quizItems = (List<QuizItem>) query.getResultList();
+            return quizItems.isEmpty() ? null : quizItems;
 
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);

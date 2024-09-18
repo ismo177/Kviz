@@ -1,12 +1,7 @@
 package com.kviz.UserScore;
 
-import com.kviz.Answer.Answer;
-import com.kviz.Category.Category;
 import com.kviz.User.User;
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.Objects;
