@@ -1,8 +1,8 @@
-package com.kviz.Answer;
+package service.Answer;
 
 
-import com.kviz.AbstractService;
-import com.kviz.Category.Category;
+import service.AbstractService;
+import service.Category.Category;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

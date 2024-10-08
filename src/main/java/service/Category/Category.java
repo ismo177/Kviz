@@ -1,6 +1,6 @@
-package com.kviz.Category;
+package service.Category;
 
-import com.kviz.Question.Question;
+import service.Question.Question;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

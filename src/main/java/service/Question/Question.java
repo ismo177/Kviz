@@ -1,6 +1,6 @@
-package com.kviz.Question;
+package service.Question;
 
-import com.kviz.Category.Category;
+import service.Category.Category;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

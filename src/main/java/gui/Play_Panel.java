@@ -1,13 +1,13 @@
-package com.kviz.Gui;
+package gui;
 
-import com.kviz.Answer.QuizItem;
-import com.kviz.Answer.QuizItemService;
-import com.kviz.Category.Category;
-import com.kviz.Category.CategoryService;
-import com.kviz.User.User;
-import com.kviz.User.UserService;
-import com.kviz.UserScore.UserScore;
-import com.kviz.UserScore.UserScoreService;
+import service.Answer.QuizItem;
+import service.Answer.QuizItemService;
+import service.Category.Category;
+import service.Category.CategoryService;
+import service.User.User;
+import service.User.UserService;
+import service.UserScore.UserScore;
+import service.UserScore.UserScoreService;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

@@ -1,4 +1,4 @@
-package com.kviz;
+package service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;

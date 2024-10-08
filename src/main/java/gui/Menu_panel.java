@@ -1,9 +1,9 @@
-package com.kviz.Gui;
+package gui;
 
-import com.kviz.User.User;
-import com.kviz.User.UserService;
-import com.kviz.UserScore.UserScore;
-import com.kviz.UserScore.UserScoreService;
+import service.User.User;
+import service.User.UserService;
+import service.UserScore.UserScore;
+import service.UserScore.UserScoreService;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -29,9 +29,9 @@ public class Menu_panel extends JFrame implements ActionListener {
     int cat;
     JLabel player;
     String playerName;
-    String userName;
-    Menu_panel(String userName){
-        this.userName = userName;
+    User tempUser;
+    Menu_panel(User tempUser){
+        this.tempUser = tempUser;
         headerLabel = new JLabel("Quiz  Game", JLabel.CENTER);
         headerLabel.setFont(new Font("Times New Roman", Font.BOLD, 60));
         headerLabel.setForeground(Color.BLACK);
@@ -72,7 +72,7 @@ public class Menu_panel extends JFrame implements ActionListener {
         menuBarPanel.add(pastScores);
         menuBarPanel.add(exitButtom);
 
-        authorLabel=new JLabel("<html><b>Alen Botic</b><br>It Akademija<br>2023/24</html>");
+        authorLabel=new JLabel("<html><b>Ismet Omerović</b><br>It Akademija<br>2023/24</html>");
         authorLabel.setSize(250,100);
         authorLabel.setForeground(Color.darkGray);
         authorLabel.setFont(new Font("Times New Roman", Font.ITALIC, 20));
@@ -125,7 +125,7 @@ public class Menu_panel extends JFrame implements ActionListener {
         setListeners();
 
 
-        player=new JLabel("Player: "+ userName);
+        player=new JLabel("Player: "+ tempUser.getUsername());
         player.setFont(new Font("Times New Roman", Font.BOLD, 24));
         player.setSize(280,50);
         player.setForeground(Color.darkGray);
@@ -159,7 +159,7 @@ public class Menu_panel extends JFrame implements ActionListener {
         mainPanel.add(centerPanel);
 
         add(mainPanel);
-        setTitle(this.userName);
+        setTitle(tempUser.getUsername());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(screenSize.width,screenSize.height);
         setLayout(null);
@@ -167,7 +167,7 @@ public class Menu_panel extends JFrame implements ActionListener {
         setVisible(true);
 
     }
-//***********************************************************************************************************
+
 
  public void setListeners(){
         JButton[] buttons={animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton, aboutButton, instructionsButton, pastScores, exitButtom};
@@ -176,7 +176,7 @@ public class Menu_panel extends JFrame implements ActionListener {
 
         }
  }
-//*************************************************************************************************************
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -213,18 +213,18 @@ public class Menu_panel extends JFrame implements ActionListener {
 //****************************************************************************************************************
 
     public void onStartQuizClick(ActionEvent actionEvent){
-        if(userName==null || cat==0){
+        if(tempUser==null || cat==0){
             UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 24));
             JOptionPane.showMessageDialog(null, "Please choose Category!", "Error", JOptionPane.ERROR_MESSAGE);
         }else {
-            Play_Panel playFrame = new Play_Panel(cat, userName);
+            Play_Panel playFrame = new Play_Panel(cat, tempUser.getUsername());
         }
 
     }
-    //*************************************************************************************************************
 
+    //use this method if working with files
     public void getScores(ActionEvent actionEvent) {
-            playerName=userName;
+            playerName=tempUser.getUsername();
         try {
             FileReader fr = new FileReader("src/main/resources/Quiz/PastScores.txt");
             BufferedReader br = new BufferedReader(fr);
@@ -275,7 +275,7 @@ public class Menu_panel extends JFrame implements ActionListener {
 //****************************************************************************************************************
 
     public void getScoresDB(ActionEvent actionEvent) {
-        playerName=userName;
+        playerName= tempUser.getUsername();
         UserScoreService userScoreService=new UserScoreService();
         List<UserScore> scoresList=userScoreService.findAll();
         new All_Players_Score_panel(scoresList);

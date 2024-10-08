@@ -1,4 +1,4 @@
-package com.kviz.Gui;
+package gui;
 
 public class Quiz_Item {
     String question;

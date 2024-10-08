@@ -1,7 +1,6 @@
-package com.kviz.UserScore;
+package service.UserScore;
 
-import com.kviz.AbstractService;
-import com.kviz.User.User;
+import service.AbstractService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

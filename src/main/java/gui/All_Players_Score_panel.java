@@ -1,6 +1,6 @@
-package com.kviz.Gui;
+package gui;
 
-import com.kviz.UserScore.UserScore;
+import service.UserScore.UserScore;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class All_Players_Score_panel extends JFrame {
     JLabel title ;
-    JPanel scorePanel, mainPanel = new JPanel();
+    JPanel scorePanel, mainPanel;
     JScrollPane scrollPane ;
     List<UserScore> userScoreList;
 
@@ -42,7 +42,6 @@ public class All_Players_Score_panel extends JFrame {
         scrollPane = new JScrollPane(scorePanel);
         scrollPane.setSize(580,700);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setLocation(0,50);
 
 
@@ -74,9 +73,6 @@ public class All_Players_Score_panel extends JFrame {
 
     }
 
-   /* public static void main(String[] args) {
-        new All_Players_Score_panel();
-    }
 
-    */
+
 }

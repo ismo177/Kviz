@@ -1,4 +1,4 @@
-package com.kviz.User;
+package service.User;
 
 import jakarta.persistence.*;
 

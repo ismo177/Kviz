@@ -1,6 +1,6 @@
-package com.kviz.UserScore;
+package service.UserScore;
 
-import com.kviz.User.User;
+import service.User.User;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

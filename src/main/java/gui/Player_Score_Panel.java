@@ -1,4 +1,4 @@
-package com.kviz.Gui;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
-package com.kviz.Answer;
+package service.Answer;
 
-import com.kviz.Question.Question;
+import service.Question.Question;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "answers")
+@Table(name = "quizitems")
 
 //@NamedQuery(name="findByCategory", query="select a from Answer a inner join a.question q where a.question=:question")
 @NamedQuery(name="findByCategory", query="select q from QuizItem q inner join q.question c where c.category=:category")

@@ -1,6 +1,6 @@
-package com.kviz.User;
+package service.User;
 
-import com.kviz.AbstractService;
+import service.AbstractService;
 import jakarta.persistence.*;
 
 public class UserService extends AbstractService<User> {
