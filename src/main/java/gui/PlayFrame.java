@@ -1,7 +1,7 @@
 package gui;
 
-import service.Answer.QuizItem;
-import service.Answer.QuizItemService;
+import service.QuizItem.QuizItem;
+import service.QuizItem.QuizItemService;
 import service.Category.Category;
 import service.Category.CategoryService;
 import service.User.User;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Timer;
 
 
-public class Play_Panel extends JFrame  implements WindowListener {
+public class PlayFrame extends JFrame  implements WindowListener {
     JButton answer1Button, answer2Button, answer3Button, answer4Button, endGameButton;
     JPanel mainPanel;
     JLabel titleLabel, questionLabel, scoreLabel, failCounterLabel, scoreValueLabel, failCounterValueLabel;
@@ -39,7 +39,7 @@ public class Play_Panel extends JFrame  implements WindowListener {
     TimerTask task;
 
 
-    public Play_Panel(int category, String playerName) {
+    public PlayFrame(int category, String playerName) {
 
         this.cat = category;
         this.player_Name = playerName;
@@ -271,7 +271,7 @@ public class Play_Panel extends JFrame  implements WindowListener {
         }else{
             //savePlayerScore();
             savePlayerScoreDB();
-            new Player_Score_Panel(player_Name, score);
+            new TempPlayerScoresFrame(player_Name, score);
             this.dispose();
         }
     }
@@ -340,7 +340,7 @@ public void loadQuizItemListDB() {
                 if (failCounter == 2) {
                     //savePlayerScore();
                     savePlayerScoreDB();
-                    new Player_Score_Panel(player_Name, score);
+                    new TempPlayerScoresFrame(player_Name, score);
                     this.dispose();
                 }
         }

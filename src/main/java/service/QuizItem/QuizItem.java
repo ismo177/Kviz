@@ -1,4 +1,4 @@
-package service.Answer;
+package service.QuizItem;
 
 import service.Question.Question;
 import jakarta.persistence.*;

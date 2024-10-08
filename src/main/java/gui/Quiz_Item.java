@@ -1,5 +1,5 @@
 package gui;
-
+//use this class if working with files
 public class Quiz_Item {
     String question;
     String answer1;

@@ -7,13 +7,13 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.List;
 
-public class All_Players_Score_panel extends JFrame {
+public class ScoresFrame extends JFrame {
     JLabel title ;
     JPanel scorePanel, mainPanel;
     JScrollPane scrollPane ;
     List<UserScore> userScoreList;
 
-    public All_Players_Score_panel(List<UserScore> list) {
+    public ScoresFrame(List<UserScore> list) {
         this.userScoreList = list;
         title = new JLabel("Scores",JLabel.CENTER);
         title.setSize(600,40);

@@ -8,7 +8,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>service.User.User</class>
         <class>service.Category.Category</class>
-        <class>service.Answer.QuizItem</class>
+        <class>service.QuizItem.QuizItem</class>
         <class>service.Question.Question</class>
         <class>service.UserScore.UserScore</class>
         <properties>

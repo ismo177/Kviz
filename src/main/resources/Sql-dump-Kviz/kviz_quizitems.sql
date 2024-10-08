@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `quizItems`
+-- Table structure for table `quizitems`
 --
 
-DROP TABLE IF EXISTS `quizItems`;
+DROP TABLE IF EXISTS `quizitems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `quizItems` (
+CREATE TABLE `quizitems` (
   `answer_id` int NOT NULL AUTO_INCREMENT,
   `question_id` int DEFAULT NULL,
   `is_correct` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
@@ -37,13 +37,13 @@ CREATE TABLE `quizItems` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `quizItems`
+-- Dumping data for table `quizitems`
 --
 
-LOCK TABLES `quizItems` WRITE;
-/*!40000 ALTER TABLE `quizItems` DISABLE KEYS */;
-INSERT INTO `quizItems` VALUES (1,1,'Pas','Macka','Konj','Pas','Patka'),(2,2,'Kit','Žirafa','Kit','Vuk','Krava'),(3,3,'Konj','Konj','Lisica','Slon','Gepard'),(4,4,'Leonardo Di Caprio','Kate Winslet','Victor Garber','BillY Zane','Leonardo Di Caprio'),(5,5,'James Cameron','Jack Nicholson','James Cameron','Morgan Freeman','Oliver Stone'),(6,6,'Keanu Reeves','Tom Hanks','Al Pacino','Vin Diesel','Keanu Reeves'),(7,7,'Atletika','Košarka','Bejzbol','Atletika','Fudbal'),(8,8,'Francuska','Francuska','Njemačka','Brazil','Italija'),(9,9,'Drazen Petrovic','Vlade Divac','Drazen Petrovic','Mirza Delibasic','Dule Savic'),(10,10,'3','1','2','5','3'),(11,11,'Hromosom1','Krv','Hromosom1','Meso','Atom'),(12,12,'Nijedan','Dva','Šest','Nijedan','4'),(13,13,'Michael Jackson','Michael Jackson','Justin Bieber','James Brown','Elvis Presley'),(14,14,'Youtube','Youtube','Tik Tok','Instagram','America got Talent'),(15,15,'Saban Saulic','Miroslav Ilic','Halid Beslic','Ljuba Alicic','Saban Saulic'),(16,16,'Govedina','Piletina','Svinjetina','Govedina','Riba'),(17,17,'Coca Cola','Pepsi','Dr Peper','Mountain Dew','Coca Cola'),(18,18,'Ananas','Naranca','Jabuka','Ananas','Jagoda');
-/*!40000 ALTER TABLE `quizItems` ENABLE KEYS */;
+LOCK TABLES `quizitems` WRITE;
+/*!40000 ALTER TABLE `quizitems` DISABLE KEYS */;
+INSERT INTO `quizitems` VALUES (1,1,'Pas','Macka','Konj','Pas','Patka'),(2,2,'Kit','Žirafa','Kit','Vuk','Krava'),(3,3,'Konj','Konj','Lisica','Slon','Gepard'),(4,4,'Leonardo Di Caprio','Kate Winslet','Victor Garber','BillY Zane','Leonardo Di Caprio'),(5,5,'James Cameron','Jack Nicholson','James Cameron','Morgan Freeman','Oliver Stone'),(6,6,'Neo','Tom Hanks','Al Pacino','Vin Diesel','Neo'),(7,7,'Atletika','Košarka','Bejzbol','Atletika','Fudbal'),(8,8,'Francuska','Francuska','Njemačka','Brazil','Italija'),(9,9,'Drazen Petrovic','Vlade Divac','Drazen Petrovic','Mirza Delibasic','Dule Savic'),(11,11,'Hromosom1','Krv','Hromosom1','Meso','Atom'),(12,12,'Nijedan','Dva','Šest','Nijedan','4'),(13,13,'Michael Jackson','Michael Jackson','Justin Bieber','James Brown','Elvis Presley'),(14,14,'Youtube','Youtube','Tik Tok','Instagram','America got Talent'),(15,15,'Saban Saulic','Miroslav Ilic','Halid Beslic','Ljuba Alicic','Saban Saulic'),(16,16,'Govedina','Piletina','Svinjetina','Govedina','Riba'),(17,17,'Coca Cola','Pepsi','Dr Peper','Mountain Dew','Coca Cola'),(18,18,'Ananas','Naranca','Jabuka','Ananas','Jagoda');
+/*!40000 ALTER TABLE `quizitems` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-06 18:14:11
+-- Dump completed on 2024-10-08 18:16:05

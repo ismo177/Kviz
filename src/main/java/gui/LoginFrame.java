@@ -264,7 +264,7 @@ public void onClickExitButton(ActionEvent e){
         if (user != null) {
             if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
                 tempUser=user;
-                new Menu_panel(user);
+                new MainFrame(user);
                 this.setVisible(false);
             }else{
             infoMessage("Can't initialize MenuFrame, User not found");}

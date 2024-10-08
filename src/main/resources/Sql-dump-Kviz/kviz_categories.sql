@@ -16,31 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user_scores`
+-- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `user_scores`;
+DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_scores` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `date` varchar(45) DEFAULT NULL,
-  `score` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `user_scores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+CREATE TABLE `categories` (
+  `category_id` int NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_scores`
+-- Dumping data for table `categories`
 --
 
-LOCK TABLES `user_scores` WRITE;
-/*!40000 ALTER TABLE `user_scores` DISABLE KEYS */;
-INSERT INTO `user_scores` VALUES (4,12,'09/06/2024 03:07:37 ',60),(5,1,'09/06/2024 04:30:41 ',0),(6,16,'09/06/2024 04:34:55 ',60),(7,13,'09/06/2024 04:38:05 ',10),(8,12,'09/06/2024 04:39:21 ',90),(9,12,'09/06/2024 04:39:23 ',100),(10,12,'09/06/2024 05:44:33 ',30),(11,12,'09/06/2024 05:52:30 ',30),(12,12,'09/06/2024 05:52:31 ',30),(13,12,'09/06/2024 05:53:52 ',50),(14,12,'09/06/2024 05:58:19 ',0),(15,12,'09/06/2024 06:04:08 ',20),(16,12,'09/06/2024 06:08:23 ',20);
-/*!40000 ALTER TABLE `user_scores` ENABLE KEYS */;
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'animals'),(2,'films'),(3,'sports'),(4,'science'),(5,'music'),(6,'food');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-06 18:14:11
+-- Dump completed on 2024-10-08 18:16:05

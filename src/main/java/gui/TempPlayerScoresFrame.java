@@ -3,10 +3,10 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class Player_Score_Panel extends JFrame {
+public class TempPlayerScoresFrame extends JFrame {
     JLabel titleLabel,scoreLabel, playerLabel;
 
-    public Player_Score_Panel(String playerName, int score) {
+    public TempPlayerScoresFrame(String playerName, int score) {
 
         titleLabel = new JLabel("Score");
         titleLabel.setFont(new Font("Serif", Font.BOLD, 40));
