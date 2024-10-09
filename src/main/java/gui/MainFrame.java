@@ -1,7 +1,6 @@
 package gui;
 
 import service.User.User;
-import service.User.UserService;
 import service.UserScore.UserScore;
 import service.UserScore.UserScoreService;
 
@@ -21,16 +20,15 @@ public class MainFrame extends JFrame  {
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension screenSize = tk.getScreenSize();
 
-    JPanel menuBarPanel, mainPanel, categoriesPanel;
+    JPanel  menuBarPanel, backPanel, categoriesPanel;
     JButton animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton;
-    JLabel headerLabel, authorLabel;
+    JLabel topPanel, authorLabel;
     JButton startQuizButton, aboutButton, instructionsButton, pastScoresButton, exitButtom;
-    int tempCategorie;
+    int tempCategory;
     JLabel playerLabel;
     User tempUser;
     MainFrame(User tempUser){
         this.tempUser = tempUser;
-
         createComponents();
         createFrame();
         addComponents();
@@ -62,18 +60,18 @@ public class MainFrame extends JFrame  {
         categoriesPanel.setLocation(280,320);
         categoriesPanel.setSize(1000,400);
 
-        mainPanel = new JPanel();
-        mainPanel.setLayout(null);
-        mainPanel.setBackground(new Color(208, 202, 253));
-        mainPanel.setLocation(0,0);
-        mainPanel.setSize(screenSize.width,screenSize.height);
+        backPanel = new JPanel();
+        backPanel.setLayout(null);
+        backPanel.setBackground(new Color(208, 202, 253));
+        backPanel.setLocation(0,0);
+        backPanel.setSize(screenSize.width,screenSize.height);
     }
 
     public void createComponents() {
-        headerLabel = new JLabel("Quiz  Game", JLabel.CENTER);
-        headerLabel.setLayout(null);
-        headerLabel.setLocation(0, 0);
-        headerLabel.setSize(screenSize.width - 15, 100);
+        topPanel = new JLabel("Quiz  Game", JLabel.CENTER);
+        topPanel.setLayout(null);
+        topPanel.setLocation(0, 0);
+        topPanel.setSize(screenSize.width - 15, 100);
 
         startQuizButton = new JButton("Start Quiz");
         aboutButton = new JButton("About");
@@ -88,6 +86,7 @@ public class MainFrame extends JFrame  {
         playerLabel = new JLabel("Player: " + tempUser.getUsername());
         playerLabel.setSize(280, 50);
         playerLabel.setLocation(40, 95);
+
 
 
         ImageIcon icon1=new ImageIcon(ClassLoader.getSystemResource("images/animals.png"));
@@ -142,9 +141,8 @@ public class MainFrame extends JFrame  {
         JButton[] menuBarPanelButtons= { startQuizButton, aboutButton, instructionsButton, pastScoresButton, exitButtom};
         JButton[] categoriesPanelButtons= { animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton};
 
-        headerLabel.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        headerLabel.setForeground(Color.BLACK);
-        headerLabel.setBackground(Color.BLACK);
+        topPanel.setFont(new Font("Times New Roman", Font.BOLD, 60));
+        topPanel.setForeground(Color.darkGray);
         playerLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
 
         playerLabel.setForeground(Color.darkGray);
@@ -170,7 +168,7 @@ public class MainFrame extends JFrame  {
     public void addComponents(){
         JButton[] menuBarButtons= { startQuizButton, aboutButton, instructionsButton, pastScoresButton, exitButtom };
         JButton[] categoriesPanelButtons={ animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton };
-        JComponent[] mainPanelComponents= {authorLabel, playerLabel, headerLabel, menuBarPanel,categoriesPanel };
+        JComponent[] mainPanelComponents= {authorLabel, playerLabel, topPanel, menuBarPanel,categoriesPanel };
 
         for(JButton button:menuBarButtons){
             menuBarPanel.add(button);
@@ -179,9 +177,9 @@ public class MainFrame extends JFrame  {
             categoriesPanel.add(button);
         }
         for(JComponent component:mainPanelComponents){
-            mainPanel.add(component);
+            backPanel.add(component);
         }
-        add(mainPanel);
+        add(backPanel);
     }
 
  public void addListeners(){
@@ -190,7 +188,7 @@ public class MainFrame extends JFrame  {
         for(JButton button: categoriesPanelButtons){
             button.addActionListener(this::chooseCategory);
         }
-        startQuizButton.addActionListener(this::onStartQuizClick);
+        startQuizButton.addActionListener(this::onClickStartQuiz);
         //aboutButton.addActionListener(this::);
         //instructionsButton.addActionListener(this::);
         pastScoresButton.addActionListener(this::onClickGetScoresButton);
@@ -200,23 +198,23 @@ public class MainFrame extends JFrame  {
 
 public void chooseCategory(ActionEvent e){
     if (e.getSource() == animalsButton) {
-        tempCategorie = 1;
-        System.out.println("Category= " + tempCategorie);
+        tempCategory = 1;
+        System.out.println("Category= " + tempCategory);
     } else if (e.getSource() == moviesButton) {
-        tempCategorie = 2;
-        System.out.println("Category= " + tempCategorie);
+        tempCategory = 2;
+        System.out.println("Category= " + tempCategory);
     } else if (e.getSource() == sportsButton) {
-        tempCategorie = 3;
-        System.out.println("Category= " + tempCategorie);
+        tempCategory = 3;
+        System.out.println("Category= " + tempCategory);
     } else if (e.getSource() == scienceButton) {
-        tempCategorie = 4;
-        System.out.println("Category= " + tempCategorie);
+        tempCategory = 4;
+        System.out.println("Category= " + tempCategory);
     } else if (e.getSource() == musicButton) {
-        tempCategorie = 5;
-        System.out.println("Category= " + tempCategorie);
+        tempCategory = 5;
+        System.out.println("Category= " + tempCategory);
     } else if (e.getSource() == foodButton) {
-        tempCategorie = 6;
-        System.out.println("Category= " + tempCategorie);
+        tempCategory = 6;
+        System.out.println("Category= " + tempCategory);
     }
 }
 
@@ -228,63 +226,65 @@ public void chooseCategory(ActionEvent e){
         }
     }
 
-
-    public void onStartQuizClick(ActionEvent actionEvent){
-        if(tempUser==null || tempCategorie ==0){
-            infoMessage("Please select categorie");
+    public void onClickStartQuiz(ActionEvent actionEvent){
+        if(tempUser==null || tempCategory ==0){
+            infoMessage("Please select category");
         }else {
-            PlayFrame playFrame = new PlayFrame(tempCategorie, tempUser.getUsername());
+            PlayFrame playFrame = new PlayFrame(tempCategory, tempUser);
         }
 
     }
 
     //use this method if working with files
     public void getScores(ActionEvent actionEvent) {
+            List<String> scoresList = getPlayerScoresList();
+            List<UserScore> userScoresList= createUserScoreList(scoresList);
+            new ScoresFrame(userScoresList);
+    }
+
+    public ArrayList<String> getPlayerScoresList() {
         try {
             FileReader fr = new FileReader("src/main/resources/Quiz/PastScores.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
-            ArrayList<String> playerScoresList=new ArrayList<>();
-
+            ArrayList<String> playerScoresList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(";");
                 String name = parts[0];
-                if(name.equals(tempUser.getUsername())) {
+                if (name.equals(tempUser.getUsername())) {
                     playerScoresList.add(line);
                 }
             }
-            List<UserScore> list=new ArrayList<>();
-            UserService userService=new UserService();
-
-            for(String string : playerScoresList){
-                String[] parts = string.split(";");
-                String name = parts[0];
-                String date = parts[1];
-                String score = parts[2];
-
-                User user=new User();
-                user.setId(null);
-                user.setUsername(name);
-                user.setPassword(null);
-
-                UserScore userScore=new UserScore();
-                userScore.setId(null);
-                userScore.setUser(user);
-                userScore.setDate(date);
-                userScore.setScore(Integer.parseInt(score.substring(score.length()-3)));
-
-                list.add(userScore);
-            }
-                new ScoresFrame(list);
-
-
-            for(String string: playerScoresList){
-                System.out.println(string);
-            }
-
-        }catch(IOException e){
-            System.out.println("Error reading scores: "+e.getMessage());
+            return playerScoresList;
+        }catch(IOException e) {
+            System.out.println("Error reading scores: " + e.getMessage());
+            ArrayList<String> specialObject= new ArrayList<>();
+            specialObject.add("Scores not found");
+            return specialObject;
         }
+    }
+
+    public List<UserScore> createUserScoreList(List<String> list){
+        List<UserScore> userScoreList=new ArrayList<>();
+        for(String string : list){
+            String[] parts = string.split(";");
+            String name = parts[0];
+            String date = parts[1];
+            String score = parts[2];
+
+            User user=new User();
+            user.setId(null);
+            user.setUsername(name);
+            user.setPassword(null);
+
+            UserScore userScore=new UserScore();
+            userScore.setId(null);
+            userScore.setUser(user);
+            userScore.setDate(date);
+            userScore.setScore(Integer.parseInt(score.substring(score.length()-3)));
+
+            userScoreList.add(userScore);
+        }return userScoreList;
     }
 
     public void onClickGetScoresButton(ActionEvent actionEvent) {

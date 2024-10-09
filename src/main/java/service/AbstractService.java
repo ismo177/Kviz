@@ -32,7 +32,6 @@ public abstract class AbstractService<E> {
             entityManager().close();
         }
 
-
     }
 
     public void edit(E entity) {

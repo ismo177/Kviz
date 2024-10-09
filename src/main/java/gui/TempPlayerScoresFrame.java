@@ -1,13 +1,17 @@
 package gui;
 
+import service.User.User;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class TempPlayerScoresFrame extends JFrame {
     JLabel titleLabel,scoreLabel, playerLabel;
-
-    public TempPlayerScoresFrame(String playerName, int score) {
-
+    User tempUser;
+    int score;
+    public TempPlayerScoresFrame(User tempUser, int score) {
+        this.tempUser = tempUser;
+        this.score = score;
         titleLabel = new JLabel("Score");
         titleLabel.setFont(new Font("Serif", Font.BOLD, 40));
         titleLabel.setForeground(Color.BLACK);
@@ -15,7 +19,7 @@ public class TempPlayerScoresFrame extends JFrame {
         titleLabel.setLocation(250,20);
 
 
-        playerLabel = new JLabel("Player Name: "+ playerName);
+        playerLabel = new JLabel("Player Name: "+ tempUser.getUsername());
         playerLabel.setFont(new Font("Serif", Font.BOLD, 30));
         playerLabel.setForeground(Color.darkGray);
         playerLabel.setSize(500,40);
@@ -37,6 +41,10 @@ public class TempPlayerScoresFrame extends JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void close(){
+        this.dispose();
     }
 
 }

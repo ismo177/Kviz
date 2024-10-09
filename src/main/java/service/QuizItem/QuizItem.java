@@ -16,7 +16,7 @@ import java.util.Objects;
 public class QuizItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "answer_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
 

@@ -22,7 +22,6 @@ public class ScoresFrame extends JFrame {
         title.setLayout(null);
         setLocation(0,10);
 
-
         scorePanel = new JPanel();
         scorePanel.setSize(600,750);
         scorePanel.setLayout(new GridLayout(userScoreList.size(),1));

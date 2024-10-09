@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 @NamedQuery(name="User.findByUsername", query="select u from User u where u.username=:username")
 
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)

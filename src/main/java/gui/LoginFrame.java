@@ -11,7 +11,7 @@ import service.User.UserService;
 public class LoginFrame extends JFrame {
 
     User tempUser;
-    JPanel topPanel, centerPanel, bottomPanel;
+    JPanel  topPanel, centerPanel, bottomPanel;
     JLabel usernameLabel, passwordLabel, titleLabel, registrationLinkLabel, loginLinkLabel;
     JTextField usernameValue;
     JPasswordField passwordValue;
@@ -26,8 +26,8 @@ public class LoginFrame extends JFrame {
     public void createFrame(){
         setTitle("Login");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 400);
         getContentPane().setBackground(new Color(208, 202, 253));
+        setSize(600, 400);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -35,6 +35,7 @@ public class LoginFrame extends JFrame {
     }
 
     public void createBackPanels(){
+
         topPanel =new JPanel();
         topPanel.setBackground(new Color(208, 202, 253));
         topPanel.setSize(600, 75);
@@ -225,7 +226,7 @@ public void addListeners(){
         component.addMouseListener(mouseExited);
     }
     loginButton.addActionListener(this::onClickLoginButton);
-   loginButton.addActionListener(this::onClickRegisterButton);
+    loginButton.addActionListener(this::onClickRegisterButton);
     exitButton.addActionListener(this::onClickExitButton);
 }
 
