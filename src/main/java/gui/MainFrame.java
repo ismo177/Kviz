@@ -23,7 +23,7 @@ public class MainFrame extends JFrame  {
     JPanel  menuBarPanel, backPanel, categoriesPanel;
     JButton animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton;
     JLabel topPanel, authorLabel;
-    JButton startQuizButton, aboutButton, instructionsButton, pastScoresButton, exitButtom;
+    JButton startQuizButton, newItems, instructionsButton, pastScoresButton, exitButtom;
     int tempCategory;
     JLabel playerLabel;
     User tempUser;
@@ -48,6 +48,11 @@ public class MainFrame extends JFrame  {
     }
 
     public void createBackPanels(){
+        topPanel = new JLabel("Quiz  Game", JLabel.CENTER);
+        topPanel.setLayout(null);
+        topPanel.setLocation(0, 0);
+        topPanel.setSize(screenSize.width - 15, 100);
+
         menuBarPanel = new JPanel();
         menuBarPanel.setLayout(new GridLayout(1,5));
         menuBarPanel.setBackground(new Color(212, 207, 248));
@@ -68,13 +73,8 @@ public class MainFrame extends JFrame  {
     }
 
     public void createComponents() {
-        topPanel = new JLabel("Quiz  Game", JLabel.CENTER);
-        topPanel.setLayout(null);
-        topPanel.setLocation(0, 0);
-        topPanel.setSize(screenSize.width - 15, 100);
-
         startQuizButton = new JButton("Start Quiz");
-        aboutButton = new JButton("About");
+        newItems = new JButton("Add New Items");
         instructionsButton = new JButton("Instructions");
         pastScoresButton = new JButton("Past Scores");
         exitButtom = new JButton("Exit");
@@ -86,7 +86,6 @@ public class MainFrame extends JFrame  {
         playerLabel = new JLabel("Player: " + tempUser.getUsername());
         playerLabel.setSize(280, 50);
         playerLabel.setLocation(40, 95);
-
 
 
         ImageIcon icon1=new ImageIcon(ClassLoader.getSystemResource("images/animals.png"));
@@ -138,7 +137,7 @@ public class MainFrame extends JFrame  {
     }
 
     public void addFont(){
-        JButton[] menuBarPanelButtons= { startQuizButton, aboutButton, instructionsButton, pastScoresButton, exitButtom};
+        JButton[] menuBarPanelButtons= { startQuizButton, newItems, instructionsButton, pastScoresButton, exitButtom};
         JButton[] categoriesPanelButtons= { animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton};
 
         topPanel.setFont(new Font("Times New Roman", Font.BOLD, 60));
@@ -166,7 +165,7 @@ public class MainFrame extends JFrame  {
 
 
     public void addComponents(){
-        JButton[] menuBarButtons= { startQuizButton, aboutButton, instructionsButton, pastScoresButton, exitButtom };
+        JButton[] menuBarButtons= { startQuizButton, newItems, instructionsButton, pastScoresButton, exitButtom };
         JButton[] categoriesPanelButtons={ animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton };
         JComponent[] mainPanelComponents= {authorLabel, playerLabel, topPanel, menuBarPanel,categoriesPanel };
 
@@ -220,7 +219,7 @@ public void chooseCategory(ActionEvent e){
 
 
     public void addBackColorForMenuPanelButtons(){
-        JButton[] buttons={startQuizButton, aboutButton, instructionsButton, pastScoresButton, exitButtom};
+        JButton[] buttons={startQuizButton, newItems, instructionsButton, pastScoresButton, exitButtom};
         for(JButton button:buttons){
             button.setBackground(new Color(185, 178, 250));
         }
