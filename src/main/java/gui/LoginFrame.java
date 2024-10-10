@@ -123,7 +123,7 @@ public class LoginFrame extends JFrame {
         for(JButton button : buttons){
             button.setFont(new Font("Times New Roman", Font.BOLD, 24));
             button.setForeground(Color.BLACK);
-            button.setBackground(new Color(185, 178, 250));
+            button.setBackground(new Color(160, 149, 255));
             button.setBorder(new LineBorder(Color.lightGray, 1, true));
         }
     }

@@ -10,35 +10,39 @@ import service.QuizItem.QuizItemService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class NewItemsFrame extends JFrame {
-    private JPanel backPanel, topPanel, centerPanel, bottomPanel;
+    private JPanel backPanel, topPanel, centerPanel, centerButtonsPanel, bottomPanel;
     private JLabel title, category;
     private JLabel question;
     private JLabel correctAnswer;
     private JLabel answer1, answer2, answer3, answer4;
     private JTextField questionValue, correctAnswerValue;
     private JTextField answer1Value, answer2Value, answer3Value, answer4Value;
-    JButton saveButton, getButton, deleteButton,exitButton;
+    JButton saveButton, getButton, deleteButton,exitButton, previousButton , nextButton;
     JComboBox comboBox;
     String[] categories={"Animals", "Films", "Sports", "Science", "Music", "Food"};
-
+    List<QuizItem> allItemsList;
+    int index=0;
     public NewItemsFrame() {
         createComponents();
         createFrame();
         addComponents();
         addListeners();
+        allItemsList=getAllItems();
     }
 
     public void createFrame() {
         setTitle("New Items");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setBackground(new Color(217, 211, 253));
-        setSize(900, 700);
+        setSize(880, 800);
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
@@ -47,8 +51,8 @@ public class NewItemsFrame extends JFrame {
 
     public void createBackPanels(){
          backPanel = new JPanel();
-         backPanel.setSize(850, 660);
-         backPanel.setLocation(40, 10);
+         backPanel.setSize(850, 760);
+         backPanel.setLocation(30, 10);
          backPanel.setLayout(null);
 
          topPanel=new JPanel();
@@ -61,15 +65,21 @@ public class NewItemsFrame extends JFrame {
          centerPanel.setLocation(-200,200);
          centerPanel.setLayout(new GridLayout(6,2,20,10));
 
+         centerButtonsPanel = new JPanel();
+         centerButtonsPanel.setSize(400, 40);
+         centerButtonsPanel.setLocation(200,580);
+         centerButtonsPanel.setLayout(new GridLayout(1,2,20,20));
+         centerButtonsPanel.setBackground(Color.RED);
+
          bottomPanel = new JPanel();
          bottomPanel.setSize(800, 50);
          bottomPanel.setLayout(new GridLayout(1,4,10,10));
-         bottomPanel.setLocation(0,590);
+         bottomPanel.setLocation(0,690);
          addBackPanelsBackground();
     }
 
     public void addBackPanelsBackground(){
-        JPanel[] panels = { backPanel, topPanel, centerPanel, bottomPanel};
+        JPanel[] panels = { backPanel, topPanel, centerPanel,centerButtonsPanel, bottomPanel};
         for (JPanel panel : panels) {
             panel.setBackground(new Color(217, 211, 253));
         }
@@ -113,8 +123,11 @@ public class NewItemsFrame extends JFrame {
         deleteButton= new JButton("Delete");
         exitButton=new JButton("Exit");
 
+        previousButton=new JButton("< Previous");
+        nextButton=new JButton("Next >");
+
         addCenterPanelComponentsFont();
-        addBottomPanelComponentsFont();
+        addButtonsFont();
         createBackPanels();
     }
 
@@ -130,8 +143,8 @@ public class NewItemsFrame extends JFrame {
         }
     }
 
-    public void addBottomPanelComponentsFont(){
-        JButton[] buttons = { saveButton, getButton, deleteButton, exitButton };
+    public void addButtonsFont(){
+        JButton[] buttons = { previousButton, nextButton, saveButton, getButton, deleteButton, exitButton };
         for(JButton button: buttons){
             button.setFont(new Font("Arial", Font.BOLD, 26));
             button.setBackground(new Color(146, 132, 255));
@@ -139,18 +152,22 @@ public class NewItemsFrame extends JFrame {
     }
 
     public void addComponents(){
-        JPanel[] panels= { topPanel, centerPanel, bottomPanel };
+        JPanel[] panels= { topPanel, centerPanel,centerButtonsPanel, bottomPanel };
         JComponent[] components= {category, comboBox, correctAnswer,correctAnswerValue, answer1,
                                     answer1Value, answer2, answer2Value, answer3, answer3Value, answer4, answer4Value };
-        JButton[] buttons= { saveButton, getButton, deleteButton, exitButton };
+        JButton[] bottomPanelButtons= { saveButton, getButton, deleteButton, exitButton };
+        JButton[] centerButtons= {previousButton, nextButton};
         topPanel.add(title);
         topPanel.add(question);
         topPanel.add(questionValue);
        for(JComponent component: components){
            centerPanel.add(component);
        }
+       for(JButton button: centerButtons){
+           centerButtonsPanel.add(button);
+       }
 
-        for(JButton button: buttons){
+        for(JButton button: bottomPanelButtons){
             bottomPanel.add(button);
         }
         for(JPanel panel: panels){
@@ -162,9 +179,12 @@ public class NewItemsFrame extends JFrame {
     public void addListeners(){
         JTextField[] values={questionValue, correctAnswerValue, answer1Value, answer2Value, answer3Value, answer4Value};
         saveButton.addActionListener(this::onClickSaveButton);
-        getButton.addActionListener(this::onClickGetFirstFromListItem);
+        getButton.addActionListener(this::onClickGet);
         deleteButton.addActionListener(this::onClickDeleteItem);
         exitButton.addActionListener(this::onClickExitButton);
+        previousButton.addActionListener(this::onClickSetPreviousOrNextItem);
+        nextButton.addActionListener(this::onClickSetPreviousOrNextItem);
+        comboBox.addItemListener(this::resetIndex);
         for(JTextField textField: values){
             textField.addMouseListener(mouseAdapter);
         }
@@ -203,8 +223,8 @@ public class NewItemsFrame extends JFrame {
         CategoryService categoryService=new CategoryService();
         String tempCat=(String) comboBox.getSelectedItem();
         assert tempCat != null;
-        int catID=getCategoryId(tempCat);
-        Category category=categoryService.find(catID);
+        int tempCatID=getCategoryId(tempCat);
+        Category category=categoryService.find(tempCatID);
         question.setCategory(category);
         questionService.create(question);
 
@@ -222,8 +242,10 @@ public class NewItemsFrame extends JFrame {
             infoMessage("Quiz item saved, and validated");
         }
         else{
-            infoMessage("Quiz item is not saved and validated");
+            infoMessage("Quiz item is not  validated");
         }
+        this.dispose();
+        new NewItemsFrame();
     }
 
     public int getCategoryId(String tempCat){
@@ -248,29 +270,70 @@ public class NewItemsFrame extends JFrame {
         this.dispose();
     }
 
-    public List<QuizItem> getQuizItems(){
+    public void onClickGet(ActionEvent e){
+        getAllItems();
+        setInitItem();
+
+    }
+
+    public List<QuizItem> getAllItems(){
         QuizItemService quizItemService=new QuizItemService();
         return quizItemService.findAll();
     }
 
-    public void setQuizItemValues(){
+    public List<QuizItem> getCategoryList(){
+        List<QuizItem> categoryList = allItemsList
+                .stream()
+                .filter(quizItem -> quizItem.getQuestion().getCategory().getId().equals(comboBox.getSelectedIndex()+1))
+                .toList();
+        return categoryList;
+    }
+
+    public void setInitItem(){
+        List<QuizItem> categoryList = getCategoryList();
+        System.out.println(categoryList.size());
+        setValues(categoryList.get(0));
+    }
+
+    public void resetIndex(ItemEvent e){
+        index=0;
+        System.out.println(index);
+    }
+
+
+    public void onClickSetPreviousOrNextItem(ActionEvent e){
+        List<QuizItem> categoryList = getCategoryList();
+        if(e.getSource() == previousButton && index>0) {
+            index--;
+        }else if(e.getSource() == nextButton && index<categoryList.size()-1) {
+            index++;
+        }
+               QuizItem item= categoryList.get(index);
+               setValues(item);
 
     }
 
-    public void onClickGetFirstFromListItem(ActionEvent e){
-
+    public void setValues(QuizItem item){
+        questionValue.setText(item.getQuestion().getQuestionText());
+        correctAnswerValue.setText(item.getIsCorrect());
+        answer1Value.setText(item.getAnswerText1());
+        answer2Value.setText(item.getAnswerText2());
+        answer3Value.setText(item.getAnswerText3());
+        answer4Value.setText(item.getAnswerText4());
     }
 
     public void onClickDeleteItem(ActionEvent e){
-
-    }
-
-    public void getNext(){
-
-    }
-
-    public void getPrevious(){
-
+        getAllItems();
+        List<QuizItem> categoryList = getCategoryList();
+        System.out.println(categoryList.size());
+        QuizItemService quizItemService=new QuizItemService();
+        QuestionService questionService=new QuestionService();
+        QuizItem item=categoryList.get(index);
+        Question question=item.getQuestion();
+        quizItemService.delete(item);
+        questionService.delete(question);
+        this.dispose();
+        new NewItemsFrame();
     }
 
     MouseAdapter mouseAdapter= new MouseAdapter() {
