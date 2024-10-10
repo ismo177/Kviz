@@ -9,13 +9,13 @@ import service.User.User;
 import service.User.UserService;
 
 public class LoginFrame extends JFrame {
-
     User tempUser;
     JPanel  topPanel, centerPanel, bottomPanel;
     JLabel usernameLabel, passwordLabel, titleLabel, registrationLinkLabel, loginLinkLabel;
     JTextField usernameValue;
     JPasswordField passwordValue;
     JButton loginButton, exitButton;
+
     LoginFrame() {
        createComponents();
        createFrame();
