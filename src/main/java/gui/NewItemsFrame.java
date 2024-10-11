@@ -354,7 +354,5 @@ public class NewItemsFrame extends JFrame {
                 "Service", JOptionPane.WARNING_MESSAGE);
     }
 
-    public static void main(String[] args) {
-        new NewItemsFrame();
-    }
+
 }

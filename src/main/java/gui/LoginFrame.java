@@ -8,13 +8,14 @@ import java.awt.event.*;
 import service.User.User;
 import service.User.UserService;
 
-public class LoginFrame extends JFrame {
+public class LoginFrame extends JFrame  {
     User tempUser;
     JPanel  topPanel, centerPanel, bottomPanel;
     JLabel usernameLabel, passwordLabel, titleLabel, registrationLinkLabel, loginLinkLabel;
     JTextField usernameValue;
     JPasswordField passwordValue;
     JButton loginButton, exitButton;
+
 
     LoginFrame() {
        createComponents();
@@ -32,6 +33,8 @@ public class LoginFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
+        this.setFocusable(true);
+        this.setFocusTraversalKeysEnabled(false);
     }
 
     public void createBackPanels(){
@@ -143,6 +146,7 @@ MouseAdapter mouseClicked=new MouseAdapter(){
     }
 };
 
+
 public void onClickLoginLink(){
     loginLinkLabel.setText(">  Login");
     registrationLinkLabel.setText("Registration");
@@ -225,6 +229,7 @@ public void addListeners(){
     for(JComponent component : componentsForMouseExited){
         component.addMouseListener(mouseExited);
     }
+
     loginButton.addActionListener(this::onClickLoginButton);
     loginButton.addActionListener(this::onClickRegisterButton);
     exitButton.addActionListener(this::onClickExitButton);
@@ -296,10 +301,5 @@ public void onClickExitButton(ActionEvent e){
         JOptionPane.showMessageDialog(this, message+" !",
                 "Service", JOptionPane.WARNING_MESSAGE);
     }
-
-    public static void main(String[] args) {
-        new LoginFrame();
-    }
-
 
 }

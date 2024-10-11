@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `quizitems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `quizitems` (
-  `answer_id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `question_id` int DEFAULT NULL,
   `is_correct` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `answer_text1` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `answer_text3` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `answer_text4` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `answer_text2` varchar(45) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
-  PRIMARY KEY (`answer_id`),
+  PRIMARY KEY (`id`),
   KEY `fk_question_id_idx` (`question_id`),
-  CONSTRAINT `fk_question_id` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;
+  CONSTRAINT `fk_question_id` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,6 @@ CREATE TABLE `quizitems` (
 
 LOCK TABLES `quizitems` WRITE;
 /*!40000 ALTER TABLE `quizitems` DISABLE KEYS */;
-INSERT INTO `quizitems` VALUES (1,1,'Pas','Macka','Konj','Pas','Patka'),(2,2,'Kit','Žirafa','Kit','Vuk','Krava'),(3,3,'Konj','Konj','Lisica','Slon','Gepard'),(4,4,'Leonardo Di Caprio','Kate Winslet','Victor Garber','BillY Zane','Leonardo Di Caprio'),(5,5,'James Cameron','Jack Nicholson','James Cameron','Morgan Freeman','Oliver Stone'),(6,6,'Neo','Tom Hanks','Al Pacino','Vin Diesel','Neo'),(7,7,'Atletika','Košarka','Bejzbol','Atletika','Fudbal'),(8,8,'Francuska','Francuska','Njemačka','Brazil','Italija'),(9,9,'Drazen Petrovic','Vlade Divac','Drazen Petrovic','Mirza Delibasic','Dule Savic'),(11,11,'Hromosom1','Krv','Hromosom1','Meso','Atom'),(12,12,'Nijedan','Dva','Šest','Nijedan','4'),(13,13,'Michael Jackson','Michael Jackson','Justin Bieber','James Brown','Elvis Presley'),(14,14,'Youtube','Youtube','Tik Tok','Instagram','America got Talent'),(15,15,'Saban Saulic','Miroslav Ilic','Halid Beslic','Ljuba Alicic','Saban Saulic'),(16,16,'Govedina','Piletina','Svinjetina','Govedina','Riba'),(17,17,'Coca Cola','Pepsi','Dr Peper','Mountain Dew','Coca Cola'),(18,18,'Ananas','Naranca','Jabuka','Ananas','Jagoda');
 /*!40000 ALTER TABLE `quizitems` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-08 18:16:05
+-- Dump completed on 2024-10-11 15:35:38

@@ -40,7 +40,7 @@ public class MainFrame extends JFrame  {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
         setTitle(tempUser.getUsername());
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(screenSize.width,screenSize.height);
         setLayout(null);
         setLocationRelativeTo(null);

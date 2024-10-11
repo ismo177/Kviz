@@ -29,7 +29,7 @@ CREATE TABLE `questions` (
   PRIMARY KEY (`question_id`),
   KEY `fk_categories_id_idx` (`category_id`),
   CONSTRAINT `fk_categories_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_croatian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,6 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,1,'Koja zivotinja ima mladunce štene?'),(2,1,'Najveca životinja na planeti je?'),(3,1,'Najbrza zivotinja je?'),(4,2,'Ko igra glavnu ulogu u filmu Titanik?'),(5,2,'Ko je režiser filma Terminator2?'),(6,2,'Kako se zvao glavni lik u filmu Matrix?'),(7,3,'Kraljica sporta je?'),(8,3,'Ko je osvoji Svjetsko prvenstvo u fudbalu 1998. godine?'),(9,3,'Najpoznatiji košarkaš u bivšoj Jugosaviji je?'),(10,4,'Koliko srca ima hobotnica?'),(11,4,'Koja je najveca molekula koja cini dio ljudskog tijela?'),(12,4,'Koliko grama soli ima u litri tipicne morske vode?'),(13,5,'Koji je pjevac izmedzu ostalog bio poznat kao \'Kralj popa\' i \'Rukavica\'?'),(14,5,'Gdje je otkriven Justin Bieber?'),(15,5,'Ko je bio kralj Narodne muzike?'),(16,6,' Od koje se vrste mesa rade hamburgeri? '),(17,6,'Koji je gazirani napitak bio najpoznatiji 1892. godine? '),(18,6,'Koje voce može omeksati meso?');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-08 18:16:04
+-- Dump completed on 2024-10-11 15:35:37
