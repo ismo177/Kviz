@@ -220,11 +220,13 @@ public class NewItemsFrame extends JFrame {
         QuestionService questionService= new QuestionService();
         Question question=new Question();
         question.setQuestionText(questionValue.getText());
+
         CategoryService categoryService=new CategoryService();
         String tempCat=(String) comboBox.getSelectedItem();
         assert tempCat != null;
         int tempCatID=getCategoryId(tempCat);
         Category category=categoryService.find(tempCatID);
+
         question.setCategory(category);
         questionService.create(question);
 
@@ -291,8 +293,11 @@ public class NewItemsFrame extends JFrame {
 
     public void setInitItem(){
         List<QuizItem> categoryList = getCategoryList();
-        System.out.println(categoryList.size());
-        setValues(categoryList.get(0));
+        if(!categoryList.isEmpty()) {
+           setValues(categoryList.get(0));
+        }
+        infoMessage("Category list is empty");
+
     }
 
     public void resetIndex(ItemEvent e){
@@ -354,5 +359,7 @@ public class NewItemsFrame extends JFrame {
                 "Service", JOptionPane.WARNING_MESSAGE);
     }
 
-
+    public static void main(String[] args) {
+        new NewItemsFrame();
+    }
 }
