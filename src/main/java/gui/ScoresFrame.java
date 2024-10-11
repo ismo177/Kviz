@@ -8,10 +8,10 @@ import java.awt.*;
 import java.util.List;
 
 public class ScoresFrame extends JFrame {
-    JLabel title ;
-    JPanel scorePanel, backPanel;
-    JScrollPane scrollPane ;
-    List<UserScore> userScoreList;
+    private JLabel title ;
+    private JPanel scorePanel, backPanel;
+    private JScrollPane scrollPane ;
+    private  List<UserScore> userScoreList;
 
     public ScoresFrame(List<UserScore> list) {
         this.userScoreList = list;

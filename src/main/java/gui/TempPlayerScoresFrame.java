@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TempPlayerScoresFrame extends JFrame {
-    JLabel titleLabel,scoreLabel, playerLabel;
+    private JLabel titleLabel,scoreLabel, playerLabel;
 
-    User tempUser;
-    int score;
+    private User tempUser;
+    private int score;
     public TempPlayerScoresFrame(User tempUser, int score) {
         this.tempUser = tempUser;
         this.score = score;

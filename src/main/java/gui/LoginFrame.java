@@ -9,12 +9,12 @@ import service.User.User;
 import service.User.UserService;
 
 public class LoginFrame extends JFrame  {
-    User tempUser;
-    JPanel  topPanel, centerPanel, bottomPanel;
-    JLabel usernameLabel, passwordLabel, titleLabel, registrationLinkLabel, loginLinkLabel;
-    JTextField usernameValue;
-    JPasswordField passwordValue;
-    JButton loginButton, exitButton;
+    private User tempUser;
+    private JPanel  topPanel, centerPanel, bottomPanel;
+    private JLabel usernameLabel, passwordLabel, titleLabel, registrationLinkLabel, loginLinkLabel;
+    private JTextField usernameValue;
+    private JPasswordField passwordValue;
+    private JButton loginButton, exitButton;
 
 
     LoginFrame() {
@@ -300,6 +300,22 @@ public void onClickExitButton(ActionEvent e){
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 24));
         JOptionPane.showMessageDialog(this, message+" !",
                 "Service", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public JTextField getUsernameValue(){
+        return this.usernameValue;
+    }
+
+    public JTextField getPasswordValue(){
+    return this.passwordValue;
+    }
+
+    public JButton getLoginButton(){
+    return this.loginButton;
+    }
+
+    public JButton getExitButton(){
+    return this.exitButton;
     }
 
 }

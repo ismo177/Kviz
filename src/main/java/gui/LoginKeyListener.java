@@ -6,39 +6,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class LoginKeyListener {
-    LoginFrame loginFrame;
+    private LoginFrame loginFrame;
     public LoginKeyListener(LoginFrame loginFrame) {
         this.loginFrame = loginFrame;
         setFrameKeyListeners();
 
     }
     public void setFrameKeyListeners(){
-        loginFrame.loginButton.addActionListener(loginButtonAction);
-        loginFrame.usernameValue.requestFocusInWindow();
-        loginFrame.loginButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter Pressed");
-        loginFrame.loginButton.getActionMap().put("Enter Pressed", loginButtonAction);
+        loginFrame.getLoginButton().addActionListener(loginButtonAction);
+        loginFrame.getUsernameValue().requestFocusInWindow();
+        loginFrame.getLoginButton().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter Pressed");
+        loginFrame.getLoginButton().getActionMap().put("Enter Pressed", loginButtonAction);
 
-        loginFrame.exitButton.addActionListener(exitButtonAction);
-        loginFrame.exitButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape Pressed");
-        loginFrame.exitButton.getActionMap().put("Escape Pressed", exitButtonAction);
+        loginFrame.getExitButton().addActionListener(exitButtonAction);
+        loginFrame.getExitButton().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape Pressed");
+        loginFrame.getExitButton().getActionMap().put("Escape Pressed", exitButtonAction);
     }
 
     AbstractAction loginButtonAction = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            loginFrame.loginButton.setBackground(new Color(101, 84, 255));
-            if(loginFrame.usernameValue.getText().isEmpty()&&loginFrame.passwordValue.getText().isEmpty()) {
+            loginFrame.getLoginButton().setBackground(new Color(101, 84, 255));
+            if(loginFrame.getUsernameValue().getText().isEmpty()&&loginFrame.getPasswordValue().getText().isEmpty()) {
                 loginFrame.dispose();
                 new LoginFrame();
             }
-            loginFrame.login(loginFrame.usernameValue.getText(), loginFrame.passwordValue.getText());
+            loginFrame.login(loginFrame.getUsernameValue().getText(), loginFrame.getPasswordValue().getText());
         }
     };
 
     AbstractAction exitButtonAction = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            loginFrame.exitButton.setBackground(new Color(101, 84, 255));
+            loginFrame.getExitButton().setBackground(new Color(101, 84, 255));
             loginFrame.dispose();
         }
     };

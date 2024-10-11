@@ -22,21 +22,21 @@ import java.util.Timer;
 
 
 public class PlayFrame extends JFrame   {
-    JButton answer1Button, answer2Button, answer3Button, answer4Button, endGameButton;
-    JPanel backPanel, topPanel, questionPanel,  centerPanel, sideCenterPanel, sideBottomPanel;
-    JLabel titleLabel, questionLabel,backIconLabel, scoreLabel, failCounterLabel, scoreValueLabel, failCounterValueLabel;
+    private JButton answer1Button, answer2Button, answer3Button, answer4Button, endGameButton;
+    private JPanel backPanel, topPanel, questionPanel,  centerPanel, sideCenterPanel, sideBottomPanel;
+    private JLabel titleLabel, questionLabel,backIconLabel, scoreLabel, failCounterLabel, scoreValueLabel, failCounterValueLabel;
 
-    List<QuizItem> quizItemList;
-    QuizItem quizItem;
-    Timer timer;
-    Random random;
-    User tempUser;
-    TimerTask task;
+    private List<QuizItem> quizItemList;
+    private QuizItem quizItem;
+    private Timer timer;
+    private Random random;
+    private User tempUser;
+    private  TimerTask task;
 
-    int score=0;
-    int correctAnswerPoints =10;
-    int failAnswerCounter =0;
-    int category;
+    private int score=0;
+    private final int correctAnswerPoints =10;
+    private int failAnswerCounter =0;
+    private int category;
 
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension screenSize = tk.getScreenSize();

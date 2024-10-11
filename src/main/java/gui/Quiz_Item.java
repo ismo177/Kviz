@@ -1,12 +1,12 @@
 package gui;
 //use this class if working with files
 public class Quiz_Item {
-    String question;
-    String answer1;
-    String answer2;
-    String answer3;
-    String answer4;
-    String isCorrect;
+   private String question;
+   private String answer1;
+   private String answer2;
+   private String answer3;
+   private String answer4;
+   private String isCorrect;
 
     public Quiz_Item(String question, String answer1, String answer2, String answer3, String answer4, String isCorrect) {
         this.question = question;

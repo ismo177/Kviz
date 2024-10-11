@@ -17,16 +17,16 @@ import java.util.List;
 
 public class MainFrame extends JFrame  {
 
-    Toolkit tk = Toolkit.getDefaultToolkit();
-    Dimension screenSize = tk.getScreenSize();
+    private Toolkit tk = Toolkit.getDefaultToolkit();
+    private Dimension screenSize = tk.getScreenSize();
 
-    JPanel  menuBarPanel, backPanel, categoriesPanel;
-    JButton animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton;
-    JLabel topPanel, authorLabel;
-    JButton startQuizButton, newItems, instructionsButton, pastScoresButton, exitButtom;
-    int tempCategory;
-    JLabel playerLabel;
-    User tempUser;
+    private JPanel  menuBarPanel, backPanel, categoriesPanel;
+    private JButton animalsButton, moviesButton, sportsButton, scienceButton, musicButton, foodButton;
+    private JLabel topPanel, authorLabel;
+    private JButton startQuizButton, newItems, instructionsButton, pastScoresButton, exitButtom;
+    private int tempCategory;
+    private JLabel playerLabel;
+    private User tempUser;
     MainFrame(User tempUser){
         this.tempUser = tempUser;
         createComponents();
