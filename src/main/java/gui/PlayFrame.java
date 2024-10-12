@@ -256,19 +256,20 @@ public void loadQuizItemListDB() {
 
 }
 
-    public void loadQuizItem(){
-        if(!quizItemList.isEmpty()) {
-            int i = random.nextInt(quizItemList.size());
-            quizItem =quizItemList.get(i);
-            setQuizItemOnPlayPanel();
-            quizItemList.remove(i);
+    public void loadQuizItem() {
+         if (!quizItemList.isEmpty()) {
+             int i = random.nextInt(quizItemList.size());
+             quizItem = quizItemList.get(i);
+             setQuizItemOnPlayPanel();
+             quizItemList.remove(i);
+         }
+         else {
+             savePlayerScoreDB();
+             new TempPlayerScoresFrame(tempUser, score);
+             this.dispose();
+         }
 
-        }else{
-            //savePlayerScore();
-            savePlayerScoreDB();
-            new TempPlayerScoresFrame(tempUser, score);
-            this.dispose();
-        }
+
     }
 
 
@@ -389,6 +390,13 @@ public void repaintPanelAndReloadQuizItem(JButton button){
         userScore.setScore(score);
         userScoreService.create(userScore);
     }
+
+    public void infoMessage(String message){
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 24));
+        JOptionPane.showMessageDialog(null, message+" !",
+                "Service", JOptionPane.WARNING_MESSAGE);
+    }
+
 
 
     public void handleEndGameButton(ActionEvent e) {

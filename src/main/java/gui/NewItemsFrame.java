@@ -295,9 +295,9 @@ public class NewItemsFrame extends JFrame {
         List<QuizItem> categoryList = getCategoryList();
         if(!categoryList.isEmpty()) {
            setValues(categoryList.get(0));
+        }else {
+            infoMessage("Category list is empty");
         }
-        infoMessage("Category list is empty");
-
     }
 
     public void resetIndex(ItemEvent e){

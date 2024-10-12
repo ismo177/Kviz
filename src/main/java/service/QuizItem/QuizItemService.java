@@ -8,7 +8,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
-import java.util.List;
+import java.util.*;
 
 public class QuizItemService extends AbstractService<QuizItem> {
 
@@ -31,7 +31,7 @@ public class QuizItemService extends AbstractService<QuizItem> {
         try {
             query.setParameter("category", category);
             List<QuizItem> quizItems = (List<QuizItem>) query.getResultList();
-            return quizItems.isEmpty() ? null : quizItems;
+            return quizItems.isEmpty() ? new ArrayList<>(1): quizItems;
 
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);

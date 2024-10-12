@@ -1,5 +1,9 @@
 package gui;
 
+import service.Category.Category;
+import service.Category.CategoryService;
+import service.QuizItem.QuizItem;
+import service.QuizItem.QuizItemService;
 import service.User.User;
 import service.UserScore.UserScore;
 import service.UserScore.UserScoreService;
@@ -230,9 +234,26 @@ public void chooseCategory(ActionEvent e){
         if(tempUser==null || tempCategory ==0){
             infoMessage("Please select category");
         }else {
-            PlayFrame playFrame = new PlayFrame(tempCategory, tempUser);
+            initPlayFrame();
         }
 
+    }
+
+    public void initPlayFrame(){
+        List<QuizItem> list=loadQuizItemListDB();
+        if(!list.isEmpty()){
+            PlayFrame playFrame = new PlayFrame(tempCategory, tempUser);
+        }
+        else{
+            infoMessage("No quiz items loaded,\n when adding some items  please restart application");
+        }
+    }
+
+    public List<QuizItem> loadQuizItemListDB() {
+        CategoryService categoryService = new CategoryService();
+        Category category=categoryService.find(this.tempCategory);
+        QuizItemService quizItemService = new QuizItemService();
+        return quizItemService.findByCategory(category);
     }
 
     //use this method if working with files
@@ -263,7 +284,7 @@ public void chooseCategory(ActionEvent e){
             return specialObject;
         }
     }
-
+//use this method if working with files
     public List<UserScore> createUserScoreList(List<String> list){
         List<UserScore> userScoreList=new ArrayList<>();
         for(String string : list){
