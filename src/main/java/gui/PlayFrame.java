@@ -321,13 +321,13 @@ public void loadList() throws IOException {
         String correctAnswer = quizItem.getIsCorrect();
         if (answerButton.getText().equals(correctAnswer)) {
                 answerButton.setBackground(Color.GREEN);
-                repaintPanelAndReloadQuizItem(answerButton);
+                repaintPanelAndReloadQuizItem();
                 score += correctAnswerPoints;
                 scoreValueLabel.setText("" + score);
         }
         else {
                 answerButton.setBackground(Color.RED);
-                repaintPanelAndReloadQuizItem(answerButton);
+                repaintPanelAndReloadQuizItem();
                 failAnswerCounter++;
                 failCounterValueLabel.setText("" + failAnswerCounter);
                 if (failAnswerCounter == 2) {
@@ -338,7 +338,7 @@ public void loadList() throws IOException {
         }
     }
 
-public void repaintPanelAndReloadQuizItem(JButton button){
+public void repaintPanelAndReloadQuizItem(){
     try {
             task = new TimerTask() {
                 public void run() {
@@ -357,6 +357,7 @@ public void repaintPanelAndReloadQuizItem(JButton button){
         try{
         FileWriter fileWriter = new FileWriter("src/main/resources/Quiz/PastScores.txt",true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
 
             LocalDateTime timeDate=LocalDateTime.now();
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss ");

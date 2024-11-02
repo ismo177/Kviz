@@ -273,7 +273,7 @@ public void onClickExitButton(ActionEvent e){
                 new MainFrame(user);
                 this.setVisible(false);
             }else{
-            infoMessage("Can't initialize MenuFrame, User not found");}
+            infoMessage("Can't initialize MenuFrame, \nUsername and/or Password incorrect");}
         }
     }
 

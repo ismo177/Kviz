@@ -177,6 +177,7 @@ public class MainFrame extends JFrame  {
         for(JButton button:menuBarButtons){
             menuBarPanel.add(button);
         }
+
         for(JButton button:categoriesPanelButtons){
             categoriesPanel.add(button);
         }
@@ -262,7 +263,7 @@ public void chooseCategory(ActionEvent e){
             List<UserScore> userScoresList= createUserScoreList(scoresList);
             new ScoresFrame(userScoresList);
     }
-
+// use this method if working with files
     public ArrayList<String> getPlayerScoresList() {
         try {
             FileReader fr = new FileReader("src/main/resources/Quiz/PastScores.txt");

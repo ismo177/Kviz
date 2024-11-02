@@ -185,6 +185,7 @@ public class NewItemsFrame extends JFrame {
         previousButton.addActionListener(this::onClickSetPreviousOrNextItem);
         nextButton.addActionListener(this::onClickSetPreviousOrNextItem);
         comboBox.addItemListener(this::resetIndex);
+        comboBox.addItemListener(this::onCategoryChangeClearTxFields);
         for(JTextField textField: values){
             textField.addMouseListener(mouseAdapter);
         }
@@ -303,6 +304,15 @@ public class NewItemsFrame extends JFrame {
     public void resetIndex(ItemEvent e){
         index=0;
         System.out.println(index);
+    }
+
+    public void onCategoryChangeClearTxFields(ItemEvent e){
+        JTextField[] values={questionValue, correctAnswerValue, answer1Value, answer2Value, answer3Value, answer4Value};
+        if(e.getSource()==comboBox){
+            for(JTextField textField: values){
+                textField.setText("");
+            }
+        }
     }
 
 
